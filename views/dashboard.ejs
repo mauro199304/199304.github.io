@@ -1,0 +1,81 @@
+<%- include ('partials/_header'); %>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="container-fluid">
+    <a class="text-primary navbar-brand" href="#">Monitor Camara</a>
+
+<div >
+  <button class="btn btn-info" type="button"  aria-expanded="false" onclick="Swal.fire('Administrador')">
+Admin
+</button>
+</div>
+</div>
+</nav>
+ <span class="navbar navbar-dark bg-dark" onclick="Swal.fire('En vivo')" id="blink"><strong>En vivo 
+ </span>
+   <p class="text-center text-muted">la transmisión es en tiempo real...  </p>
+  </strong>
+
+ 
+  <div>
+             <img src="<%= url %>" width="830" height="580"  />
+  </div>
+
+<script type="text/javascript">
+
+  
+  window.setInterval (BlinkIt, 500);
+var color = "green";
+function BlinkIt () {
+var blink = document.getElementById ("blink");
+color = (color == "#ffffff")? "green" : "#ffffff";
+blink.style.color = color;
+blink.style.fontSize='18px';}
+
+date = new Date();
+year = date.getFullYear();
+month = date.getMonth() + 1;
+day = date.getDate();
+document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+
+</script>
+
+  <p class="text-center text-muted" id="current_date">Usuario Autorizado</p>
+  
+  <nav class="text-right navbar navbar-expand-lg navbar-light bg-dark">
+  <div class="text-right container-fluid">
+  <a id="current_date" class="text-primary text-center navbar-brand">Ultimos Movimientos Del Dia de hoy </a>
+
+</div>
+</nav>
+
+<br>
+<h1 class="text-center"> Videos  </h1>
+<div style="background-color: gray;" class="container">
+<div class="row">
+<% if (data) { %>
+<% for ( var i = 2; i < data.length; i++) {%>
+
+<!-- 1:1 aspect ratio -->
+
+
+<div class="col-md-6" >
+<p class="text-left h5 mb-4">Se detecto movimiento: <br>
+<%= data[i].hora %></p>
+<div class="embed-responsive embed-responsive-16by9 z-depth-2">
+  <iframe class="embed-responsive-item" src="<%= data[i].url %>" allowfullscreen></iframe>
+  </div>
+  </div>
+  <% } %>
+  <% } %>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+  
+<%- include ('partials/_footer'); %>
